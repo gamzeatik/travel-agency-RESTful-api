@@ -1,0 +1,43 @@
+spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+    default-property-inclusion: non_null
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/travelAgency
+    username: admin
+    password: 12345
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: false
+  application:
+    name: agency
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    url: /v3/api-docs
+
+
+
+application:
+  security:
+    jwt:
+      secret-key: 404E270366556A586E3272357538782F413F4428472B4B6250645367566B5GGZ
+      expiration: 2592000000 # a month
+      refresh-token:
+        expiration: 2592000000 # a month
+
+logging:
+  level:
+    org.springframework.security: DEBUG
