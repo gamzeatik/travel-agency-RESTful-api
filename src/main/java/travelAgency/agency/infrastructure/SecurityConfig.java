@@ -53,7 +53,8 @@ public class SecurityConfig {
                                 "transfers/transfer/**",
                                 "vehicles/vehicle/**",
                                 "vehicles/vehicle-list",
-                                "transfers/search-transfer"
+                                "transfers/search-transfer",
+                                "tours/search-tours"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

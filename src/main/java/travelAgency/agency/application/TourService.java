@@ -6,6 +6,7 @@ import travelAgency.agency.domain.Tour;
 import travelAgency.agency.domain.TourRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -56,5 +57,10 @@ public class TourService {
             return tourRepository.save(founded.get());
         }
         return null;
+    }
+
+    public List<Tour> searchTours(String query) {
+        Optional<List<Tour>> searchResult = tourRepository.search(query);
+        return searchResult.orElse(null);
     }
 }

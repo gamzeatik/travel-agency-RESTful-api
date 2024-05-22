@@ -12,7 +12,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateTransferDto {
     UUID fromDestination;
+    String fromDestinationName;
     UUID toDestination;
+    String toDestinationName;
     Double price;
     UUID vehicle;
     OffsetDateTime pickupDate;

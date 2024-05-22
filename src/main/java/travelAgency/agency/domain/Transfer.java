@@ -18,17 +18,21 @@ public class Transfer {
     private UUID id;
 
     private UUID fromDestination;
+    private String fromDestinationName;
 
     private UUID toDestination;
+    private String toDestinationName;
     private Double price;
 
     private UUID vehicle;
     private OffsetDateTime pickupDate;
 
-    public Transfer(UUID id, UUID fromDestination, UUID toDestination, Double price, UUID vehicle, OffsetDateTime pickupDate) {
+    public Transfer(UUID id, UUID fromDestination, String fromDestinationName, UUID toDestination, String toDestinationName, Double price, UUID vehicle, OffsetDateTime pickupDate) {
         this.id = id;
         this.fromDestination = fromDestination;
+        this.fromDestinationName = fromDestinationName;
         this.toDestination = toDestination;
+        this.toDestinationName = toDestinationName;
         this.price = price;
         this.vehicle = vehicle;
         this.pickupDate = pickupDate;

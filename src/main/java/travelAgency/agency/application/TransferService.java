@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import travelAgency.agency.domain.*;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,7 +27,9 @@ public class TransferService {
         var result = new Transfer(
                 UUID.randomUUID(),
                 transfer.getFromDestination(),
+                transfer.getFromDestinationName(),
                 transfer.getToDestination(),
+                transfer.getToDestinationName(),
                 transfer.getPrice(),
                 transfer.getVehicle(),
                 transfer.getPickupDate()
@@ -57,6 +60,7 @@ public class TransferService {
         }
 
         return new TransferDto(
+                transfer.getId(),
                 fromDestination.getName(),
                 toDestination.getName(),
                 transfer.getPickupDate(),
@@ -68,20 +72,52 @@ public class TransferService {
     }
 
     public RoundTripTransferDto searchOneWay(UUID from, UUID to, OffsetDateTime date) {
-        Optional<Transfer> transfer = transferRepository.findByFromDestinationAndToDestinationAndPickupDate(from, to, date);
-        var result = transfer.map(this::mapToDTO).orElse(null);
-        return new RoundTripTransferDto(
-                result,
-                null
-        );
+        var fromDestination = transferDestinationsRepository.findById(from).orElse(null);
+        var toDestination = transferDestinationsRepository.findById(to).orElse(null);
+        if (fromDestination == null || toDestination == null) {
+            return null;
+        } else {
+            List<TransferDto> onwardJourneytList = new ArrayList<>();
+            Optional<List<Transfer>> onwardJourney = transferRepository.search(fromDestination.getName(), toDestination.getName());
+            if (onwardJourney.isPresent()) {
+                for (Transfer t : onwardJourney.get()) {
+                    var first = mapToDTO(t);
+                    onwardJourneytList.add(first);
+                }
+            }
+            return new RoundTripTransferDto(
+                    onwardJourneytList,
+                    null
+            );
+        }
     }
 
     public RoundTripTransferDto searchRoundTrip(UUID from, UUID to, OffsetDateTime onwardDate, OffsetDateTime returnDate) {
-        Optional<Transfer> onwardJourney = transferRepository.findByFromDestinationAndToDestinationAndPickupDate(from, to, onwardDate);
-        Optional<Transfer> returnJourney = transferRepository.findByFromDestinationAndToDestinationAndPickupDate(from, to, returnDate);
-        var first = onwardJourney.map(this::mapToDTO).orElse(null);
-        var second = returnJourney.map(this::mapToDTO).orElse(null);
+        var fromDestination = transferDestinationsRepository.findById(from).orElse(null);
+        var toDestination = transferDestinationsRepository.findById(to).orElse(null);
 
-        return new RoundTripTransferDto(first, second);
+        if (fromDestination == null || toDestination == null) {
+            return null;
+        } else {
+            List<TransferDto> onwardJourneytList = new ArrayList<>();
+            List<TransferDto> returnJourneytList = new ArrayList<>();
+
+            Optional<List<Transfer>> onwardJourney = transferRepository.search(fromDestination.getName(), toDestination.getName());
+            Optional<List<Transfer>> returnJourney = transferRepository.search(fromDestination.getName(), toDestination.getName());
+
+            if (onwardJourney.isPresent()) {
+                for (Transfer t : onwardJourney.get()) {
+                    var first = mapToDTO(t);
+                    onwardJourneytList.add(first);
+                }
+            }
+            if (returnJourney.isPresent()) {
+                for (Transfer t : returnJourney.get()) {
+                    var second = mapToDTO(t);
+                    returnJourneytList.add(second);
+                }
+            }
+            return new RoundTripTransferDto(onwardJourneytList, returnJourneytList);
+        }
     }
 }

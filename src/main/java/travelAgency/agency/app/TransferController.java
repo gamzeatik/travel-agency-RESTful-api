@@ -44,8 +44,9 @@ public class TransferController {
             @RequestParam String from,
             @RequestParam String to,
             @RequestParam OffsetDateTime date,
+            @RequestParam(required = false) boolean isRoundTrip,
             @RequestParam(required = false) OffsetDateTime returnDate) {
-        if (returnDate != null) {
+        if (isRoundTrip) {
             return transferService.searchRoundTrip(UUID.fromString(from), UUID.fromString(to), date, returnDate);
         } else
             return transferService.searchOneWay(UUID.fromString(from), UUID.fromString(to), date);
