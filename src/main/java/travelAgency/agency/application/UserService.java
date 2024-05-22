@@ -49,6 +49,7 @@ public class UserService {
 
     private void saveUserToken(UUID userId, String jwtToken) {
         var token = Token.builder()
+                .id(UUID.randomUUID())
                 .userId(userId)
                 .token(jwtToken)
                 .tokenType(Token.TokenType.BEARER)
