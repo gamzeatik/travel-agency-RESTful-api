@@ -1,7 +1,8 @@
 package travelAgency.agency.app;
 
 import org.springframework.web.bind.annotation.*;
-import travelAgency.agency.application.RoundTripTransferDTO;
+import travelAgency.agency.application.CreateTransferDto;
+import travelAgency.agency.application.RoundTripTransferDto;
 import travelAgency.agency.application.TransferService;
 import travelAgency.agency.domain.Transfer;
 
@@ -19,7 +20,7 @@ public class TransferController {
     }
 
     @PostMapping("/post-transfer")
-    public Transfer createTransfer(@RequestBody Transfer transfer) {
+    public Transfer createTransfer(@RequestBody CreateTransferDto transfer) {
         return transferService.createTransfer(transfer);
     }
 
@@ -39,7 +40,7 @@ public class TransferController {
     }
 
     @GetMapping("/search-transfer")
-    public RoundTripTransferDTO searchTransfer(
+    public RoundTripTransferDto searchTransfer(
             @RequestParam String from,
             @RequestParam String to,
             @RequestParam OffsetDateTime date,

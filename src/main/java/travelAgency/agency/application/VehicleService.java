@@ -21,8 +21,20 @@ public class VehicleService {
     }
 
     @Transactional
-    public Vehicle createVehicle(Vehicle vehicle) {
-        return vehicleRepository.save(vehicle);
+    public Vehicle createVehicle(CreateVehicleDto vehicle) {
+        var result = new Vehicle(
+                UUID.randomUUID(),
+                vehicle.name,
+                vehicle.carImage,
+                vehicle.pax,
+                vehicle.isVip,
+                vehicle.type,
+                vehicle.price,
+                vehicle.description,
+                vehicle.luggageAllowance
+        );
+        vehicleRepository.save(result);
+        return result;
     }
 
     public Vehicle getVehicle(UUID uuid) {

@@ -1,7 +1,9 @@
 package travelAgency.agency.app;
 
 import org.springframework.web.bind.annotation.*;
+import travelAgency.agency.application.CreateTourDto;
 import travelAgency.agency.application.TourService;
+import travelAgency.agency.application.UpdateTourDto;
 import travelAgency.agency.domain.Tour;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public class TourController {
     }
 
     @PostMapping
-    public Tour createTour(@RequestBody Tour tour) {
+    public Tour createTour(@RequestBody CreateTourDto tour) {
         return tourService.createTour(tour);
     }
 
@@ -34,5 +36,10 @@ public class TourController {
     @DeleteMapping("/delete-tour/{id}")
     public void deleteTour(@PathVariable String id) {
         tourService.deleteTour(UUID.fromString(id));
+    }
+
+    @PutMapping("/update-tour")
+    public Tour updateTour(@RequestBody UpdateTourDto tour){
+        return tourService.updateTour(tour);
     }
 }

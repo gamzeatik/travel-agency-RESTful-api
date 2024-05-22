@@ -1,6 +1,7 @@
 package travelAgency.agency.app;
 
 import org.springframework.web.bind.annotation.*;
+import travelAgency.agency.application.CreateReservationDto;
 import travelAgency.agency.application.ReservationService;
 import travelAgency.agency.domain.Reservation;
 
@@ -21,7 +22,7 @@ public class ReservationController {
     }
 
     @PostMapping("/post-reservation")
-    public Reservation createReservation(@RequestBody Reservation reservation) {
+    public ReservationService.ReservationResult createReservation(@RequestBody CreateReservationDto reservation) {
         return reservationService.createReservation(reservation);
     }
 }

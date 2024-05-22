@@ -22,8 +22,8 @@ public class Blogs {
     private boolean isActive = true;
     private OffsetDateTime createAt;
 
-    public Blogs(String title, String description, boolean isActive) {
-        this.id = UUID.randomUUID();
+    public Blogs(UUID id, String title, String description, boolean isActive) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.isActive = isActive;

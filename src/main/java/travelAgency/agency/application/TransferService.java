@@ -22,8 +22,16 @@ public class TransferService {
     }
 
     @Transactional
-    public Transfer createTransfer(Transfer transfer) {
-        return transferRepository.save(transfer);
+    public Transfer createTransfer(CreateTransferDto transfer) {
+        var result = new Transfer(
+                UUID.randomUUID(),
+                transfer.getFromDestination(),
+                transfer.getToDestination(),
+                transfer.getPrice(),
+                transfer.getVehicle(),
+                transfer.getPickupDate()
+        );
+        return transferRepository.save(result);
     }
 
     public List<Transfer> getTransferList() {
@@ -39,7 +47,7 @@ public class TransferService {
         transferRepository.deleteById(uuid);
     }
 
-    public TransferDTO mapToDTO(Transfer transfer) {
+    public TransferDto mapToDTO(Transfer transfer) {
         TransferDestinations fromDestination = transferDestinationsRepository.findById(transfer.getFromDestination()).orElse(null);
         TransferDestinations toDestination = transferDestinationsRepository.findById(transfer.getToDestination()).orElse(null);
         Vehicle vehicle = vehicleRepository.findById(transfer.getVehicle()).orElse(null);
@@ -48,34 +56,32 @@ public class TransferService {
             return null;
         }
 
-        return new TransferDTO(
+        return new TransferDto(
                 fromDestination.getName(),
                 toDestination.getName(),
                 transfer.getPickupDate(),
                 vehicle.getType(),
                 vehicle.getCarImage(),
                 vehicle.getPax(),
-                "Estimated Time", // You can calculate and provide the actual estimated time here
-                transfer.getPrice(),
-                transfer.isRoundTrip()
-        );
+                "Estimated Time",
+                transfer.getPrice());
     }
 
-    public RoundTripTransferDTO searchOneWay(UUID from, UUID to, OffsetDateTime date) {
+    public RoundTripTransferDto searchOneWay(UUID from, UUID to, OffsetDateTime date) {
         Optional<Transfer> transfer = transferRepository.findByFromDestinationAndToDestinationAndPickupDate(from, to, date);
         var result = transfer.map(this::mapToDTO).orElse(null);
-        return new RoundTripTransferDTO(
+        return new RoundTripTransferDto(
                 result,
                 null
         );
     }
 
-    public RoundTripTransferDTO searchRoundTrip(UUID from, UUID to, OffsetDateTime onwardDate, OffsetDateTime returnDate) {
+    public RoundTripTransferDto searchRoundTrip(UUID from, UUID to, OffsetDateTime onwardDate, OffsetDateTime returnDate) {
         Optional<Transfer> onwardJourney = transferRepository.findByFromDestinationAndToDestinationAndPickupDate(from, to, onwardDate);
         Optional<Transfer> returnJourney = transferRepository.findByFromDestinationAndToDestinationAndPickupDate(from, to, returnDate);
         var first = onwardJourney.map(this::mapToDTO).orElse(null);
         var second = returnJourney.map(this::mapToDTO).orElse(null);
 
-        return new RoundTripTransferDTO(first, second);
+        return new RoundTripTransferDto(first, second);
     }
 }

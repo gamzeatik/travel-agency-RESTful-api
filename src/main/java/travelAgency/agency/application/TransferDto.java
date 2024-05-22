@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
-public class TransferDTO {
+public class TransferDto {
     private String fromDestination;
     private String toDestination;
     private OffsetDateTime pickupDate;
@@ -18,5 +18,4 @@ public class TransferDTO {
     private int paxCount;
     private String estimatedTime;
     private Double price;
-    private boolean isRoundTrip;
 }

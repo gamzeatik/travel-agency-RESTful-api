@@ -26,8 +26,8 @@ public class Tour {
     private OffsetDateTime endDate;
     private Double price;
 
-    public Tour(String name, String description, String fromLocation, String toLocation, OffsetDateTime startDate, OffsetDateTime endDate, Double price) {
-        this.id = UUID.randomUUID();
+    public Tour(UUID id, String name, String description, String fromLocation, String toLocation, OffsetDateTime startDate, OffsetDateTime endDate, Double price) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.fromLocation = fromLocation;

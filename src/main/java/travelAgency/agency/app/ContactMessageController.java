@@ -2,6 +2,7 @@ package travelAgency.agency.app;
 
 import org.springframework.web.bind.annotation.*;
 import travelAgency.agency.application.ContactMessageService;
+import travelAgency.agency.application.CreateContactMessage;
 import travelAgency.agency.domain.ContactMessage;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ContactMessageController {
     }
 
     @PostMapping("/post-contact-us")
-    public ContactMessage createMessage(@RequestBody ContactMessage contactMessage) {
+    public String createMessage(@RequestBody CreateContactMessage contactMessage) {
         return contactMessageService.createMessage(contactMessage);
     }
 }

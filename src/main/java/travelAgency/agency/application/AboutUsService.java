@@ -23,8 +23,14 @@ public class AboutUsService {
     }
 
     @Transactional
-    public AboutUs createAboutUs(AboutUs aboutUs) {
-        return aboutUsRepository.save(aboutUs);
+    public AboutUs createAboutUs(CreateAboutUsDto aboutUs) {
+        var result = new AboutUs(
+                UUID.randomUUID(),
+                aboutUs.getTitle(),
+                aboutUs.getDescription(),
+                aboutUs.isActive()
+        );
+        return aboutUsRepository.save(result);
     }
 
     @Transactional
@@ -33,7 +39,7 @@ public class AboutUsService {
     }
 
     @Transactional
-    public AboutUs updateAboutUs(AboutUs aboutUs) {
+    public AboutUs updateAboutUs(UpdateAboutUsDto aboutUs) {
         var founded = aboutUsRepository.findById(aboutUs.getId());
         if (founded.isPresent()) {
             founded.get().setActive(aboutUs.isActive());

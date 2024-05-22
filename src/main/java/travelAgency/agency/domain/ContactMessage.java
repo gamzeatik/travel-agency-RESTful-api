@@ -24,8 +24,8 @@ public class ContactMessage {
     private String email;
     private OffsetDateTime sentAt;
 
-    public ContactMessage(String subject, String message, String name, String surname, String phone, String email) {
-        this.id = UUID.randomUUID();
+    public ContactMessage(UUID id, String subject, String message, String name, String surname, String phone, String email) {
+        this.id = id;
         this.subject = subject;
         this.message = message;
         this.name = name;

@@ -36,8 +36,8 @@ public class Reservation {
         Transfer
     }
 
-    public Reservation(String firstName, String lastName, String email, String phone, String address, ReservationType reservationType, UUID transferId, UUID tourId, OffsetDateTime createAt) {
-        this.id = UUID.randomUUID();
+    public Reservation(UUID id, String firstName, String lastName, String email, String phone, String address, ReservationType reservationType, UUID transferId, UUID tourId) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -46,6 +46,6 @@ public class Reservation {
         this.reservationType = reservationType;
         this.transferId = transferId;
         this.tourId = tourId;
-        this.createAt = createAt;
+        this.createAt = OffsetDateTime.now();
     }
 }

@@ -25,8 +25,8 @@ public class Vehicle {
     private int luggageAllowance;
 
 
-    public Vehicle(String name, String carImage, int pax, boolean isVip, String type, Double price, String description, int luggageAllowance) {
-        this.id = UUID.randomUUID();
+    public Vehicle(UUID id,String name, String carImage, int pax, boolean isVip, String type, Double price, String description, int luggageAllowance) {
+        this.id = id;
         this.name = name;
         this.carImage = carImage;
         this.pax = pax;

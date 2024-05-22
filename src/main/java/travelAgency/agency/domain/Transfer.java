@@ -23,14 +23,14 @@ public class Transfer {
     private Double price;
 
     private UUID vehicle;
-    private boolean isRoundTrip;
     private OffsetDateTime pickupDate;
 
-    public Transfer(UUID fromDestination, UUID toDestination, Double price, UUID vehicle) {
-        this.id = UUID.randomUUID();
+    public Transfer(UUID id, UUID fromDestination, UUID toDestination, Double price, UUID vehicle, OffsetDateTime pickupDate) {
+        this.id = id;
         this.fromDestination = fromDestination;
         this.toDestination = toDestination;
         this.price = price;
         this.vehicle = vehicle;
+        this.pickupDate = pickupDate;
     }
 }

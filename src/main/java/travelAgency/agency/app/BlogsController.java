@@ -2,6 +2,8 @@ package travelAgency.agency.app;
 
 import org.springframework.web.bind.annotation.*;
 import travelAgency.agency.application.BlogsService;
+import travelAgency.agency.application.CreateBlogDto;
+import travelAgency.agency.application.UpdateBlogDto;
 import travelAgency.agency.domain.Blogs;
 
 import java.util.List;
@@ -21,7 +23,7 @@ public class BlogsController {
     }
 
     @PostMapping("/post-blog")
-    public Blogs createBlog(@RequestBody Blogs blogs) {
+    public Blogs createBlog(@RequestBody CreateBlogDto blogs) {
         return blogsService.createBlog(blogs);
     }
 
@@ -31,7 +33,7 @@ public class BlogsController {
     }
 
     @PutMapping("/update-blog")
-    public Blogs updateBlog(@RequestBody Blogs blogs) {
+    public Blogs updateBlog(@RequestBody UpdateBlogDto blogs) {
         return blogsService.updateBlog(blogs);
     }
 

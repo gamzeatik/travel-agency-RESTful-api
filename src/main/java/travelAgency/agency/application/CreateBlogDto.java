@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class RoundTripTransferDTO {
-    private TransferDTO onwardJourney;
-    private TransferDTO returnJourney;
+public class CreateBlogDto {
+    String title;
+    String description;
+    boolean isActive;
 }

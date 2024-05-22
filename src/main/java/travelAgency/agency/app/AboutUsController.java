@@ -2,6 +2,8 @@ package travelAgency.agency.app;
 
 import org.springframework.web.bind.annotation.*;
 import travelAgency.agency.application.AboutUsService;
+import travelAgency.agency.application.CreateAboutUsDto;
+import travelAgency.agency.application.UpdateAboutUsDto;
 import travelAgency.agency.domain.AboutUs;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class AboutUsController {
     }
 
     @PostMapping("/post-about")
-    public AboutUs createAboutUs(@RequestBody AboutUs aboutUs) {
+    public AboutUs createAboutUs(@RequestBody CreateAboutUsDto aboutUs) {
         return aboutUsService.createAboutUs(aboutUs);
     }
 
@@ -32,7 +34,7 @@ public class AboutUsController {
     }
 
     @PutMapping("/update-about")
-    public AboutUs updateAboutUs(@RequestBody AboutUs aboutUs) {
+    public AboutUs updateAboutUs(@RequestBody UpdateAboutUsDto aboutUs) {
         return aboutUsService.updateAboutUs(aboutUs);
     }
 

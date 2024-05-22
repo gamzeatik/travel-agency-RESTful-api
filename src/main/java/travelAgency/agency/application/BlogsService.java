@@ -21,22 +21,30 @@ public class BlogsService {
     }
 
     @Transactional
-    public Blogs createBlog(Blogs blogs) {
-        return blogsRepository.save(blogs);
+    public Blogs createBlog(CreateBlogDto blogs) {
+        var result = new Blogs(
+                UUID.randomUUID(),
+                blogs.getTitle(),
+                blogs.getDescription(),
+                blogs.isActive()
+        );
+        return blogsRepository.save(result);
     }
 
     public void deleteBlog(UUID uuid) {
         blogsRepository.deleteById(uuid);
     }
 
-    public Blogs updateBlog(Blogs blogs) {
+    @Transactional
+    public Blogs updateBlog(UpdateBlogDto blogs) {
         var founded = blogsRepository.findById(blogs.getId());
         if (founded.isPresent()) {
             founded.get().setTitle(blogs.getTitle());
             founded.get().setDescription(blogs.getDescription());
             founded.get().setActive(blogs.isActive());
+            return blogsRepository.save(founded.get());
         }
-        return blogsRepository.save(blogs);
+        return null;
     }
 
     public Blogs getBlog(UUID uuid) {

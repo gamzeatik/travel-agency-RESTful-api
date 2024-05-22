@@ -17,8 +17,18 @@ public class TourService {
     }
 
     @Transactional
-    public Tour createTour(Tour tour) {
-        return tourRepository.save(tour);
+    public Tour createTour(CreateTourDto tour) {
+        var result = new Tour(
+                UUID.randomUUID(),
+                tour.getName(),
+                tour.getDescription(),
+                tour.getFromLocation(),
+                tour.getToLocation(),
+                tour.getStartDate(),
+                tour.getEndDate(),
+                tour.getPrice()
+        );
+        return tourRepository.save(result);
     }
 
     public List<Tour> getTourList() {
@@ -31,5 +41,20 @@ public class TourService {
 
     public void deleteTour(UUID uuid) {
         tourRepository.deleteById(uuid);
+    }
+
+    public Tour updateTour(UpdateTourDto tour) {
+        var founded = tourRepository.findById(tour.getId());
+        if (founded.isPresent()) {
+            founded.get().setName(tour.getName());
+            founded.get().setDescription(tour.getDescription());
+            founded.get().setFromLocation(tour.getFromLocation());
+            founded.get().setToLocation(tour.getToLocation());
+            founded.get().setStartDate(tour.getStartDate());
+            founded.get().setEndDate(tour.getEndDate());
+            founded.get().setPrice(tour.getPrice());
+            return tourRepository.save(founded.get());
+        }
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package travelAgency.agency.app;
 
 import org.springframework.web.bind.annotation.*;
+import travelAgency.agency.application.CreateVehicleDto;
 import travelAgency.agency.application.VehicleService;
 import travelAgency.agency.domain.Vehicle;
 
@@ -22,7 +23,7 @@ public class VehicleController {
     }
 
     @PostMapping("/post-vehicle")
-    public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
+    public Vehicle createVehicle(@RequestBody CreateVehicleDto vehicle) {
         return vehicleService.createVehicle(vehicle);
     }
 
