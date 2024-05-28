@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 ),
                 @Server(
                         description = "PROD ENV",
-                        url = "https://comfortable-transfer-e8c89bf85564.herokuapp.com/swagger-ui/index.html"
+                        url = "https://comfortable-transfer-e8c89bf85564.herokuapp.com"
                 )
         },
         security = {
