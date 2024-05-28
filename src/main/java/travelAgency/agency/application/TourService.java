@@ -6,7 +6,6 @@ import travelAgency.agency.domain.Tour;
 import travelAgency.agency.domain.TourRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,7 +26,8 @@ public class TourService {
                 tour.getToLocation(),
                 tour.getStartDate(),
                 tour.getEndDate(),
-                tour.getPrice()
+                tour.getPrice(),
+                tour.getImageUrl()
         );
         return tourRepository.save(result);
     }
@@ -54,13 +54,14 @@ public class TourService {
             founded.get().setStartDate(tour.getStartDate());
             founded.get().setEndDate(tour.getEndDate());
             founded.get().setPrice(tour.getPrice());
+            founded.get().setImageUrl(tour.getImageUrl());
             return tourRepository.save(founded.get());
         }
         return null;
     }
 
-    public List<Tour> searchTours(String query) {
-        Optional<List<Tour>> searchResult = tourRepository.search(query);
-        return searchResult.orElse(null);
-    }
+//    public List<Tour> searchTours(String query) {
+//        Optional<List<Tour>> searchResult = tourRepository.search(query);
+//        return searchResult.orElse(null);
+//    }
 }

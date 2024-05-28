@@ -17,4 +17,5 @@ public class CreateTourDto {
     OffsetDateTime startDate;
     OffsetDateTime endDate;
     Double price;
+    String imageUrl;
 }

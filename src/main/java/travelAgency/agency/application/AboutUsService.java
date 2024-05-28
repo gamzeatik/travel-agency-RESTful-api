@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 import travelAgency.agency.domain.AboutUs;
 import travelAgency.agency.domain.AboutUsRepository;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,8 +17,8 @@ public class AboutUsService {
     }
 
     @Transactional(readOnly = true)
-    public List<AboutUs> getAboutUsList() {
-        return aboutUsRepository.findAll();
+    public AboutUs getAboutUsList() {
+        return aboutUsRepository.findAll().get(0);
     }
 
     @Transactional
@@ -33,10 +32,10 @@ public class AboutUsService {
         return aboutUsRepository.save(result);
     }
 
-    @Transactional
-    public void deleteAboutUs(UUID id) {
-        aboutUsRepository.deleteById(id);
-    }
+//    @Transactional
+//    public void deleteAboutUs(UUID id) {
+//        aboutUsRepository.deleteById(id);
+//    }
 
     @Transactional
     public AboutUs updateAboutUs(UpdateAboutUsDto aboutUs) {
@@ -50,7 +49,7 @@ public class AboutUsService {
         return null;
     }
 
-    public AboutUs getAboutUs(UUID uuid) {
-        return aboutUsRepository.findById(uuid).orElse(null);
-    }
+//    public AboutUs getAboutUs(UUID uuid) {
+//        return aboutUsRepository.findById(uuid).orElse(null);
+//    }
 }

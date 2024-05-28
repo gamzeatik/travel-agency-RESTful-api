@@ -25,8 +25,9 @@ public class Tour {
     private OffsetDateTime startDate;
     private OffsetDateTime endDate;
     private Double price;
+    private String imageUrl;
 
-    public Tour(UUID id, String name, String description, String fromLocation, String toLocation, OffsetDateTime startDate, OffsetDateTime endDate, Double price) {
+    public Tour(UUID id, String name, String description, String fromLocation, String toLocation, OffsetDateTime startDate, OffsetDateTime endDate, Double price, String imageUrl) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,5 +36,6 @@ public class Tour {
         this.startDate = startDate;
         this.endDate = endDate;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 }

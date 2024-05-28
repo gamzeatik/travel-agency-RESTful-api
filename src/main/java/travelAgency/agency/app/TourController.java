@@ -39,11 +39,11 @@ public class TourController {
     }
 
     @PutMapping("/update-tour")
-    public Tour updateTour(@RequestBody UpdateTourDto tour){
+    public Tour updateTour(@RequestBody UpdateTourDto tour) {
         return tourService.updateTour(tour);
     }
-    @GetMapping("/search-tours")
-    public List<Tour> searchTours(@RequestParam(required = false) String query){
-        return tourService.searchTours(query);
-    }
+//    @GetMapping("/search-tours")
+//    public List<Tour> searchTours(@RequestParam(required = false) String query){
+//        return tourService.searchTours(query);
+//    }
 }

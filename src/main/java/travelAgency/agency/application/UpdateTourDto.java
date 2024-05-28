@@ -19,4 +19,5 @@ public class UpdateTourDto {
     OffsetDateTime startDate;
     OffsetDateTime endDate;
     Double price;
+    String imageUrl;
 }

@@ -17,6 +17,7 @@ public class BlogsController {
     public BlogsController(BlogsService blogsService) {
         this.blogsService = blogsService;
     }
+
     @GetMapping("/blog-list")
     public List<Blogs> getBlogList() {
         return blogsService.getBlogList();

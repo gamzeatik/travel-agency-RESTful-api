@@ -6,9 +6,6 @@ import travelAgency.agency.application.CreateAboutUsDto;
 import travelAgency.agency.application.UpdateAboutUsDto;
 import travelAgency.agency.domain.AboutUs;
 
-import java.util.List;
-import java.util.UUID;
-
 @RequestMapping("/about-us")
 @RestController
 public class AboutUsController {
@@ -18,8 +15,8 @@ public class AboutUsController {
         this.aboutUsService = aboutUsService;
     }
 
-    @GetMapping("/about-list")
-    public List<AboutUs> getAboutUsList() {
+    @GetMapping("/about")
+    public AboutUs getAboutUsList() {
         return aboutUsService.getAboutUsList();
     }
 
@@ -28,18 +25,19 @@ public class AboutUsController {
         return aboutUsService.createAboutUs(aboutUs);
     }
 
-    @DeleteMapping("/delete-about/{id}")
-    public void deleteAboutUs(@PathVariable String id) {
-        aboutUsService.deleteAboutUs(UUID.fromString(id));
-    }
-
     @PutMapping("/update-about")
     public AboutUs updateAboutUs(@RequestBody UpdateAboutUsDto aboutUs) {
         return aboutUsService.updateAboutUs(aboutUs);
     }
+//
+//    @DeleteMapping("/delete-about/{id}")
+//    public void deleteAboutUs(@PathVariable String id) {
+//        aboutUsService.deleteAboutUs(UUID.fromString(id));
 
-    @GetMapping("/about/{id}")
-    public AboutUs getAboutUs(@PathVariable String id) {
-        return aboutUsService.getAboutUs(UUID.fromString(id));
-    }
+//    }
+//
+//    @GetMapping("/about/{id}")
+//    public AboutUs getAboutUs(@PathVariable String id) {
+//        return aboutUsService.getAboutUs(UUID.fromString(id));
+//    }
 }
