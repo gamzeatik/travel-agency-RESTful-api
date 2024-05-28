@@ -14,4 +14,5 @@ public class UpdateAboutUsDto {
     String title;
     String description;
     boolean isActive;
+    String imageUrl;
 }

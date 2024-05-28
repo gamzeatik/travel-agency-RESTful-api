@@ -27,7 +27,8 @@ public class AboutUsService {
                 UUID.randomUUID(),
                 aboutUs.getTitle(),
                 aboutUs.getDescription(),
-                aboutUs.isActive()
+                aboutUs.isActive(),
+                aboutUs.getImageUrl()
         );
         return aboutUsRepository.save(result);
     }
@@ -44,6 +45,7 @@ public class AboutUsService {
             founded.get().setActive(aboutUs.isActive());
             founded.get().setDescription(aboutUs.getDescription());
             founded.get().setTitle(aboutUs.getTitle());
+            founded.get().setImageUrl(aboutUs.getImageUrl());
             return aboutUsRepository.save(founded.get());
         }
         return null;

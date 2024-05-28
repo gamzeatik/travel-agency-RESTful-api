@@ -20,12 +20,14 @@ public class AboutUs {
     private String description;
     private boolean isActive = true;
     private OffsetDateTime createAt;
+    private String imageUrl;
 
-    public AboutUs(UUID id,String title, String description, boolean isActive) {
+    public AboutUs(UUID id, String title, String description, boolean isActive, String imageUrl) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.isActive = isActive;
         this.createAt = OffsetDateTime.now();
+        this.imageUrl = imageUrl;
     }
 }

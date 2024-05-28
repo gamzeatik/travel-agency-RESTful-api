@@ -11,4 +11,5 @@ public class CreateAboutUsDto {
     String title;
     String description;
     boolean isActive;
+    String imageUrl;
 }
