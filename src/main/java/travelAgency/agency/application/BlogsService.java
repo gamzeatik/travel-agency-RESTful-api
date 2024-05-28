@@ -26,7 +26,8 @@ public class BlogsService {
                 UUID.randomUUID(),
                 blogs.getTitle(),
                 blogs.getDescription(),
-                blogs.isActive()
+                blogs.isActive(),
+                blogs.getImageUrl()
         );
         return blogsRepository.save(result);
     }
@@ -42,6 +43,7 @@ public class BlogsService {
             founded.get().setTitle(blogs.getTitle());
             founded.get().setDescription(blogs.getDescription());
             founded.get().setActive(blogs.isActive());
+            founded.get().setImageUrl(blogs.getImageUrl());
             return blogsRepository.save(founded.get());
         }
         return null;

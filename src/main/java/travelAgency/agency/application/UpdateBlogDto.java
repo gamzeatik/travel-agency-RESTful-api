@@ -14,4 +14,5 @@ public class UpdateBlogDto {
     String title;
     String description;
     boolean isActive;
+    String imageUrl;
 }

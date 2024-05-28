@@ -11,4 +11,5 @@ public class CreateBlogDto {
     String title;
     String description;
     boolean isActive;
+    String imageUrl;
 }
