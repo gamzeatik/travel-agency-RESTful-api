@@ -43,7 +43,7 @@ public class TransferController {
     public RoundTripTransferDto searchTransfer(
             @RequestParam String from,
             @RequestParam String to,
-            @RequestParam OffsetDateTime date,
+            @RequestParam(required = false) OffsetDateTime date,
             @RequestParam(required = false) boolean isRoundTrip,
             @RequestParam(required = false) OffsetDateTime returnDate) {
         if (isRoundTrip) {
