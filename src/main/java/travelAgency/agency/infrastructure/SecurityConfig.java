@@ -39,9 +39,7 @@ public class SecurityConfig {
                                 "/configuration/ui",
                                 "/configuration/security",
                                 "/user/**",
-                                "/about-us/about-list",
-                                "/about-us/about/**",
-                                "about-us/about/",
+                                "/about-us/about",
                                 "/blogs/blog-list",
                                 "/blogs/blog/**",
                                 "/blogs/blog/",
@@ -49,12 +47,17 @@ public class SecurityConfig {
                                 "reservation/post-reservation",
                                 "tours/tour-list",
                                 "tours/tour/**",
+                                "tours/tour/",
                                 "transfers/transfer-list",
                                 "transfers/transfer/**",
+                                "transfers/transfer/",
+                                "transfers/search-transfer",
                                 "vehicles/vehicle/**",
                                 "vehicles/vehicle-list",
-                                "transfers/search-transfer",
-                                "tours/search-tours"
+                                "vehicles/vehicle/",
+                                "transfer-destinations/transfer-destination",
+                                "transfer-destinations/transfer-destination/**",
+                                "transfer-destinations/transfer-destinations-list"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
