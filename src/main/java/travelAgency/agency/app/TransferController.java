@@ -3,10 +3,10 @@ package travelAgency.agency.app;
 import org.springframework.web.bind.annotation.*;
 import travelAgency.agency.application.CreateTransferDto;
 import travelAgency.agency.application.RoundTripTransferDto;
+import travelAgency.agency.application.TransferSearchRequest;
 import travelAgency.agency.application.TransferService;
 import travelAgency.agency.domain.Transfer;
 
-import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,16 +39,12 @@ public class TransferController {
         transferService.deleteTransfer(UUID.fromString(id));
     }
 
+
     @GetMapping("/search-transfer")
-    public RoundTripTransferDto searchTransfer(
-            @RequestParam String from,
-            @RequestParam String to,
-            @RequestParam(required = false) OffsetDateTime date,
-            @RequestParam(required = false) boolean isRoundTrip,
-            @RequestParam(required = false) OffsetDateTime returnDate) {
-        if (isRoundTrip) {
-            return transferService.searchRoundTrip(UUID.fromString(from), UUID.fromString(to), date, returnDate);
+    public RoundTripTransferDto searchTransfer(@RequestBody TransferSearchRequest searchRequest) {
+        if (searchRequest.isRoundTrip()) {
+            return transferService.searchRoundTrip(UUID.fromString(searchRequest.getFrom()), UUID.fromString(searchRequest.getTo()), searchRequest.getDate(), searchRequest.getReturnDate());
         } else
-            return transferService.searchOneWay(UUID.fromString(from), UUID.fromString(to), date);
+            return transferService.searchOneWay(UUID.fromString(searchRequest.getFrom()), UUID.fromString(searchRequest.getTo()), searchRequest.getDate());
     }
 }

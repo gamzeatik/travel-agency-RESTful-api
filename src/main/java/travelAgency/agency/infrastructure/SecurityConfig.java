@@ -52,6 +52,7 @@ public class SecurityConfig {
                                 "transfers/transfer/**",
                                 "transfers/transfer/",
                                 "transfers/search-transfer",
+                                "transfers/search-transfer/**",
                                 "vehicles/vehicle/**",
                                 "vehicles/vehicle-list",
                                 "vehicles/vehicle/",
