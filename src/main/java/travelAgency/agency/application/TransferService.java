@@ -102,7 +102,7 @@ public class TransferService {
             List<TransferDto> returnJourneytList = new ArrayList<>();
 
             Optional<List<Transfer>> onwardJourney = transferRepository.listWithCriteria(fromDestination.getName(), toDestination.getName());
-            Optional<List<Transfer>> returnJourney = transferRepository.listWithCriteria(fromDestination.getName(), toDestination.getName());
+            Optional<List<Transfer>> returnJourney = transferRepository.listWithCriteria(toDestination.getName(),fromDestination.getName());
 
             if (onwardJourney.isPresent()) {
                 for (Transfer t : onwardJourney.get()) {
