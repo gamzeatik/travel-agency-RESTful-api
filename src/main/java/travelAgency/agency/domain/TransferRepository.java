@@ -13,6 +13,6 @@ public interface TransferRepository extends JpaRepository<Transfer, UUID> {
             where t.fromDestinationName ilike :fromDestinationName
             or t.toDestinationName ilike :toDestinationName
             """)
-    Optional<List<Transfer>> search(String fromDestinationName, String toDestinationName);
+    Optional<List<Transfer>> listWithCriteria(String fromDestinationName, String toDestinationName);
 
 }

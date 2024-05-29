@@ -2,8 +2,6 @@ package travelAgency.agency.app;
 
 import org.springframework.web.bind.annotation.*;
 import travelAgency.agency.application.CreateTransferDto;
-import travelAgency.agency.application.RoundTripTransferDto;
-import travelAgency.agency.application.TransferSearchRequest;
 import travelAgency.agency.application.TransferService;
 import travelAgency.agency.domain.Transfer;
 
@@ -39,12 +37,4 @@ public class TransferController {
         transferService.deleteTransfer(UUID.fromString(id));
     }
 
-
-    @GetMapping("/search-transfer")
-    public RoundTripTransferDto searchTransfer(@RequestBody TransferSearchRequest searchRequest) {
-        if (searchRequest.isRoundTrip()) {
-            return transferService.searchRoundTrip(UUID.fromString(searchRequest.getFrom()), UUID.fromString(searchRequest.getTo()), searchRequest.getDate(), searchRequest.getReturnDate());
-        } else
-            return transferService.searchOneWay(UUID.fromString(searchRequest.getFrom()), UUID.fromString(searchRequest.getTo()), searchRequest.getDate());
-    }
 }

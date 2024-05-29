@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import travelAgency.agency.domain.*;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -71,14 +70,14 @@ public class TransferService {
                 transfer.getPrice());
     }
 
-    public RoundTripTransferDto searchOneWay(UUID from, UUID to, OffsetDateTime date) {
+    public RoundTripTransferDto oneWayTransfer(UUID from, UUID to) {
         var fromDestination = transferDestinationsRepository.findById(from).orElse(null);
         var toDestination = transferDestinationsRepository.findById(to).orElse(null);
         if (fromDestination == null || toDestination == null) {
             return null;
         } else {
             List<TransferDto> onwardJourneytList = new ArrayList<>();
-            Optional<List<Transfer>> onwardJourney = transferRepository.search(fromDestination.getName(), toDestination.getName());
+            Optional<List<Transfer>> onwardJourney = transferRepository.listWithCriteria(fromDestination.getName(), toDestination.getName());
             if (onwardJourney.isPresent()) {
                 for (Transfer t : onwardJourney.get()) {
                     var first = mapToDTO(t);
@@ -92,7 +91,7 @@ public class TransferService {
         }
     }
 
-    public RoundTripTransferDto searchRoundTrip(UUID from, UUID to, OffsetDateTime onwardDate, OffsetDateTime returnDate) {
+    public RoundTripTransferDto roundTripTransfer(UUID from, UUID to) {
         var fromDestination = transferDestinationsRepository.findById(from).orElse(null);
         var toDestination = transferDestinationsRepository.findById(to).orElse(null);
 
@@ -102,8 +101,8 @@ public class TransferService {
             List<TransferDto> onwardJourneytList = new ArrayList<>();
             List<TransferDto> returnJourneytList = new ArrayList<>();
 
-            Optional<List<Transfer>> onwardJourney = transferRepository.search(fromDestination.getName(), toDestination.getName());
-            Optional<List<Transfer>> returnJourney = transferRepository.search(fromDestination.getName(), toDestination.getName());
+            Optional<List<Transfer>> onwardJourney = transferRepository.listWithCriteria(fromDestination.getName(), toDestination.getName());
+            Optional<List<Transfer>> returnJourney = transferRepository.listWithCriteria(fromDestination.getName(), toDestination.getName());
 
             if (onwardJourney.isPresent()) {
                 for (Transfer t : onwardJourney.get()) {
