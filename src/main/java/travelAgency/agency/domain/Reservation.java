@@ -1,14 +1,12 @@
 package travelAgency.agency.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -18,35 +16,36 @@ import java.util.UUID;
 public class Reservation {
     @Id
     private UUID id;
-
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
-    private String address;
     @Enumerated(EnumType.STRING)
     private ReservationType reservationType;
     private UUID firstTransferId;
     private UUID secondTransferId;
+    private String flightNumber;
+    private String note;
     private UUID tourId;
     private OffsetDateTime createAt;
 
+
+    @ManyToMany
+    @JoinTable(
+            name = "reservation_customer",
+            joinColumns = @JoinColumn(name = "reservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id")
+    )
+    private Set<Customer> customers;
 
     public enum ReservationType {
         Tour,
         Transfer
     }
 
-    public Reservation(UUID id, String firstName, String lastName, String email, String phone, String address, ReservationType reservationType, UUID firstTransferId, UUID secondTransferId, UUID tourId) {
+    public Reservation(UUID id, ReservationType reservationType, UUID firstTransferId, UUID secondTransferId, String flightNumber, String note, UUID tourId) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
         this.reservationType = reservationType;
         this.firstTransferId = firstTransferId;
         this.secondTransferId = secondTransferId;
+        this.flightNumber = flightNumber;
+        this.note = note;
         this.tourId = tourId;
         this.createAt = OffsetDateTime.now();
     }
