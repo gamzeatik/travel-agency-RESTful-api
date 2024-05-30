@@ -26,7 +26,8 @@ public class Reservation {
     private String address;
     @Enumerated(EnumType.STRING)
     private ReservationType reservationType;
-    private UUID transferId;
+    private UUID firstTransferId;
+    private UUID secondTransferId;
     private UUID tourId;
     private OffsetDateTime createAt;
 
@@ -36,7 +37,7 @@ public class Reservation {
         Transfer
     }
 
-    public Reservation(UUID id, String firstName, String lastName, String email, String phone, String address, ReservationType reservationType, UUID transferId, UUID tourId) {
+    public Reservation(UUID id, String firstName, String lastName, String email, String phone, String address, ReservationType reservationType, UUID firstTransferId, UUID secondTransferId, UUID tourId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,7 +45,8 @@ public class Reservation {
         this.phone = phone;
         this.address = address;
         this.reservationType = reservationType;
-        this.transferId = transferId;
+        this.firstTransferId = firstTransferId;
+        this.secondTransferId = secondTransferId;
         this.tourId = tourId;
         this.createAt = OffsetDateTime.now();
     }

@@ -35,8 +35,9 @@ public class ReservationService {
                     reservation.getPhone(),
                     reservation.getAddress(),
                     reservation.getReservationType(),
-                    reservation.getTransferId(),
-                    reservation.getTransferId()
+                    reservation.getFirstTransferId(),
+                    reservation.getSecondTransferId(),
+                    reservation.getTourId()
             );
             var res = reservationRepository.save(result);
             return new ReservationResult(res.getId(), "Reservation created!");

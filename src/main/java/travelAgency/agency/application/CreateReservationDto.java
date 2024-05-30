@@ -17,6 +17,7 @@ public class CreateReservationDto {
     String phone;
     String address;
     Reservation.ReservationType reservationType;
-    UUID transferId;
+    UUID firstTransferId;
+    UUID secondTransferId;
     UUID tourId;
 }
