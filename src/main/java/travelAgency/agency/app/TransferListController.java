@@ -19,10 +19,10 @@ public class TransferListController {
     }
 
     @GetMapping
-    public RoundTripTransferDto getTransfers(@RequestParam String from, @RequestParam String to, @RequestParam boolean isRoundTrip) {
+    public RoundTripTransferDto getTransfers(@RequestParam String from, @RequestParam String to, @RequestParam boolean isRoundTrip, @RequestParam(required = false) int searchPax) {
         if (isRoundTrip) {
-            return transferService.roundTripTransfer(UUID.fromString(from), UUID.fromString(to));
+            return transferService.roundTripTransfer(UUID.fromString(from), UUID.fromString(to), searchPax);
         } else
-            return transferService.oneWayTransfer(UUID.fromString(from), UUID.fromString(to));
+            return transferService.oneWayTransfer(UUID.fromString(from), UUID.fromString(to), searchPax);
     }
 }

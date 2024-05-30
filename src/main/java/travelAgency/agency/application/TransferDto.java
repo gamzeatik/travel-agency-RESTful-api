@@ -20,4 +20,5 @@ public class TransferDto {
     int paxCount;
     String estimatedTime;
     Double price;
+    int searchPax;
 }

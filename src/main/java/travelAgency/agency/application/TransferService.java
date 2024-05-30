@@ -49,7 +49,7 @@ public class TransferService {
         transferRepository.deleteById(uuid);
     }
 
-    public TransferDto mapToDTO(Transfer transfer) {
+    public TransferDto mapToDTO(Transfer transfer, int searchPax) {
         TransferDestinations fromDestination = transferDestinationsRepository.findById(transfer.getFromDestination()).orElse(null);
         TransferDestinations toDestination = transferDestinationsRepository.findById(transfer.getToDestination()).orElse(null);
         Vehicle vehicle = vehicleRepository.findById(transfer.getVehicle()).orElse(null);
@@ -57,7 +57,9 @@ public class TransferService {
         if (fromDestination == null || toDestination == null || vehicle == null) {
             return null;
         }
-
+        if (searchPax > vehicle.getPax()) {
+            return null;
+        }
         return new TransferDto(
                 transfer.getId(),
                 fromDestination.getName(),
@@ -67,10 +69,11 @@ public class TransferService {
                 vehicle.getCarImage(),
                 vehicle.getPax(),
                 "Estimated Time",
-                transfer.getPrice());
+                transfer.getPrice(),
+                searchPax);
     }
 
-    public RoundTripTransferDto oneWayTransfer(UUID from, UUID to) {
+    public RoundTripTransferDto oneWayTransfer(UUID from, UUID to, int searchPax) {
         var fromDestination = transferDestinationsRepository.findById(from).orElse(null);
         var toDestination = transferDestinationsRepository.findById(to).orElse(null);
         if (fromDestination == null || toDestination == null) {
@@ -80,8 +83,10 @@ public class TransferService {
             Optional<List<Transfer>> onwardJourney = transferRepository.listWithCriteria(fromDestination.getName(), toDestination.getName());
             if (onwardJourney.isPresent()) {
                 for (Transfer t : onwardJourney.get()) {
-                    var first = mapToDTO(t);
-                    onwardJourneytList.add(first);
+                    var first = mapToDTO(t, searchPax);
+                    if (first != null) {
+                        onwardJourneytList.add(first);
+                    }
                 }
             }
             return new RoundTripTransferDto(
@@ -91,7 +96,7 @@ public class TransferService {
         }
     }
 
-    public RoundTripTransferDto roundTripTransfer(UUID from, UUID to) {
+    public RoundTripTransferDto roundTripTransfer(UUID from, UUID to, int searchPax) {
         var fromDestination = transferDestinationsRepository.findById(from).orElse(null);
         var toDestination = transferDestinationsRepository.findById(to).orElse(null);
 
@@ -102,18 +107,22 @@ public class TransferService {
             List<TransferDto> returnJourneytList = new ArrayList<>();
 
             Optional<List<Transfer>> onwardJourney = transferRepository.listWithCriteria(fromDestination.getName(), toDestination.getName());
-            Optional<List<Transfer>> returnJourney = transferRepository.listWithCriteria(toDestination.getName(),fromDestination.getName());
+            Optional<List<Transfer>> returnJourney = transferRepository.listWithCriteria(toDestination.getName(), fromDestination.getName());
 
             if (onwardJourney.isPresent()) {
                 for (Transfer t : onwardJourney.get()) {
-                    var first = mapToDTO(t);
-                    onwardJourneytList.add(first);
+                    var first = mapToDTO(t, searchPax);
+                    if (first != null) {
+                        onwardJourneytList.add(first);
+                    }
                 }
             }
             if (returnJourney.isPresent()) {
                 for (Transfer t : returnJourney.get()) {
-                    var second = mapToDTO(t);
-                    returnJourneytList.add(second);
+                    var second = mapToDTO(t, searchPax);
+                    if (second != null) {
+                        returnJourneytList.add(second);
+                    }
                 }
             }
             return new RoundTripTransferDto(onwardJourneytList, returnJourneytList);
