@@ -13,7 +13,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
@@ -51,19 +50,19 @@ public class SecurityConfig {
                                 "/blogs/blog/**",
                                 "/blogs/blog/",
                                 "/contact-us/post-contact-us",
-                                "reservation/post-reservation",
-                                "tours/tour-list",
-                                "tours/tour/**",
-                                "tours/tour/",
-                                "transfers/transfer-list",
-                                "transfers/transfer/**",
-                                "transfers/transfer/",
-                                "vehicles/vehicle/**",
-                                "vehicles/vehicle-list",
-                                "vehicles/vehicle/",
-                                "transfer-destinations/transfer-destination",
-                                "transfer-destinations/transfer-destination/**",
-                                "transfer-destinations/transfer-destinations-list",
+                                "/reservation/post-reservation",
+                                "/tours/tour-list",
+                                "/tours/tour/**",
+                                "/tours/tour/",
+                                "/transfers/transfer-list",
+                                "/transfers/transfer/**",
+                                "/transfers/transfer/",
+                                "/vehicles/vehicle/**",
+                                "/vehicles/vehicle-list",
+                                "/vehicles/vehicle/",
+                                "/transfer-destinations/transfer-destination",
+                                "/transfer-destinations/transfer-destination/**",
+                                "/transfer-destinations/transfer-destinations-list",
                                 "/list"
                         ).permitAll()
                         .anyRequest().authenticated()
@@ -83,8 +82,8 @@ public class SecurityConfig {
     @Bean
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://comfortabletransfer.com"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://comfortabletransfer.com", "https://comfortabletransfer.com/api"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
 
