@@ -2,6 +2,7 @@ package travelAgency.agency.app;
 
 import org.springframework.web.bind.annotation.*;
 import travelAgency.agency.application.CreateTransferDestinationsDto;
+import travelAgency.agency.application.ResponseTransferDestinations;
 import travelAgency.agency.application.TransferDestinationsService;
 import travelAgency.agency.domain.TransferDestinations;
 
@@ -23,12 +24,12 @@ public class TransferDestinationsController {
     }
 
     @GetMapping("/transfer-destinations-list")
-    public List<TransferDestinations> getTransferDestinationsList() {
+    public List<ResponseTransferDestinations> getTransferDestinationsList() {
         return transferDestinationsService.getTransferDestinationList();
     }
 
     @GetMapping("/transfer-destination/{id}")
-    public TransferDestinations getTransferDestination(@PathVariable String id) {
+    public ResponseTransferDestinations getTransferDestination(@PathVariable String id) {
         return transferDestinationsService.getTransferDestination(UUID.fromString(id));
     }
 

@@ -7,13 +7,16 @@ import travelAgency.agency.domain.TransferDestinationsRepository;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class TransferDestinationsService {
-    public TransferDestinationsService(TransferDestinationsRepository transferDestinationsRepository) {
+    public TransferDestinationsService(ModelMapperServices modelMapperServices, TransferDestinationsRepository transferDestinationsRepository) {
+        this.modelMapperServices = modelMapperServices;
         this.transferDestinationsRepository = transferDestinationsRepository;
     }
 
+    private final ModelMapperServices modelMapperServices;
     private final TransferDestinationsRepository transferDestinationsRepository;
 
     @Transactional
@@ -29,16 +32,22 @@ public class TransferDestinationsService {
         return transferDestinationsRepository.save(result);
     }
 
-    public List<TransferDestinations> getTransferDestinationList() {
-        return transferDestinationsRepository.findAll().stream().toList();
+    public List<ResponseTransferDestinations> getTransferDestinationList() {
+        List<TransferDestinations> transferDestinations = transferDestinationsRepository.findAll().stream().toList();
+        return transferDestinations.stream().map(this::mapToResponse).collect(Collectors.toList());
     }
 
-    public TransferDestinations getTransferDestination(UUID uuid) {
-        return transferDestinationsRepository.findById(uuid).orElse(null);
+    public ResponseTransferDestinations getTransferDestination(UUID uuid) {
+        TransferDestinations transferDestinations = transferDestinationsRepository.findById(uuid).orElse(null);
+        return mapToResponse(transferDestinations);
     }
 
     @Transactional
     public void deleteTransferDestination(UUID uuid) {
         transferDestinationsRepository.deleteById(uuid);
+    }
+
+    private ResponseTransferDestinations mapToResponse(TransferDestinations destinations) {
+        return modelMapperServices.forResponse().map(destinations, ResponseTransferDestinations.class);
     }
 }
