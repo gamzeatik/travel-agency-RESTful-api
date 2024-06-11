@@ -60,9 +60,9 @@ public class SecurityConfig {
                                 "/vehicles/vehicle/**",
                                 "/vehicles/vehicle-list",
                                 "/vehicles/vehicle/",
-                                "/transfer-destinations/transfer-destination",
-                                "/transfer-destinations/transfer-destination/**",
-                                "/transfer-destinations/transfer-destinations-list",
+                                "/api/transfer-destinations/transfer-destination",
+                                "/api/transfer-destinations/transfer-destination/**",
+                                "/api/transfer-destinations/transfer-destinations-list",
                                 "/list"
                         ).permitAll()
                         .anyRequest().authenticated()
