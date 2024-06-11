@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -18,16 +19,17 @@ import java.util.List;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
-    private final LogoutHandler logoutHandler;
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
+    private final LogoutHandler logoutHandler;
 
-    public SecurityConfig(LogoutHandler logoutHandler, JwtAuthenticationFilter jwtAuthFilter, AuthenticationProvider authenticationProvider) {
-        this.logoutHandler = logoutHandler;
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthFilter, AuthenticationProvider authenticationProvider, LogoutHandler logoutHandler) {
         this.jwtAuthFilter = jwtAuthFilter;
         this.authenticationProvider = authenticationProvider;
+        this.logoutHandler = logoutHandler;
     }
 
     @Bean
@@ -60,9 +62,9 @@ public class SecurityConfig {
                                 "/vehicles/vehicle/**",
                                 "/vehicles/vehicle-list",
                                 "/vehicles/vehicle/",
-                                "/api/transfer-destinations/transfer-destination",
-                                "/api/transfer-destinations/transfer-destination/**",
-                                "/api/transfer-destinations/transfer-destinations-list",
+                                "/transfer-destinations/transfer-destination",
+                                "/transfer-destinations/transfer-destination/**",
+                                "/transfer-destinations/transfer-destinations-list",
                                 "/list"
                         ).permitAll()
                         .anyRequest().authenticated()
@@ -82,7 +84,7 @@ public class SecurityConfig {
     @Bean
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://comfortabletransfer.com", "https://comfortabletransfer.com/api"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://comfortabletransfer.com"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
