@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/transfer-destinations")
+@RequestMapping("/api/transfer-destinations")
 public class TransferDestinationsController {
     private final TransferDestinationsService transferDestinationsService;
 
