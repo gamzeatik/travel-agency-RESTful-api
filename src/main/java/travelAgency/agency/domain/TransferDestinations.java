@@ -18,15 +18,11 @@ public class TransferDestinations {
     private String name;
     private String code;
     private String address;
-    private double latitude;
-    private double longitude;
 
-    public TransferDestinations(UUID id, String name, String code, String address, double latitude, double longitude) {
+    public TransferDestinations(UUID id, String name, String code, String address) {
         this.id = id;
         this.name = name;
         this.code = code;
         this.address = address;
-        this.latitude = latitude;
-        this.longitude = longitude;
     }
 }

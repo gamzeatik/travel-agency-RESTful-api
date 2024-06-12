@@ -12,6 +12,4 @@ public class ResponseTransferDestinations {
     String name;
     String code;
     String address;
-    double latitude;
-    double longitude;
 }

@@ -25,9 +25,7 @@ public class TransferDestinationsService {
                 UUID.randomUUID(),
                 transferDestinations.getName(),
                 transferDestinations.getCode(),
-                transferDestinations.getAddress(),
-                transferDestinations.getLatitude(),
-                transferDestinations.getLongitude()
+                transferDestinations.getAddress()
         );
         return transferDestinationsRepository.save(result);
     }

@@ -11,6 +11,4 @@ public class CreateTransferDestinationsDto {
     String name;
     String code;
     String address;
-    double latitude;
-    double longitude;
 }
