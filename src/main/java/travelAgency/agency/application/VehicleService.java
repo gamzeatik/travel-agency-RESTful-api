@@ -40,4 +40,24 @@ public class VehicleService {
     public Vehicle getVehicle(UUID uuid) {
         return vehicleRepository.findById(uuid).orElse(null);
     }
+
+    public Vehicle updateVehicle(Vehicle vehicle) {
+        var foundedVehicle = vehicleRepository.findById(vehicle.getId()).orElse(null);
+        if (foundedVehicle != null) {
+            foundedVehicle.setName(vehicle.getName());
+            foundedVehicle.setCarImage(vehicle.getCarImage());
+            foundedVehicle.setPax(vehicle.getPax());
+            foundedVehicle.setVip(vehicle.isVip());
+            foundedVehicle.setType(vehicle.getType());
+            foundedVehicle.setPrice(vehicle.getPrice());
+            foundedVehicle.setDescription(vehicle.getDescription());
+            foundedVehicle.setLuggageAllowance(vehicle.getLuggageAllowance());
+            return vehicleRepository.save(foundedVehicle);
+        }
+        return null;
+    }
+
+    public void deleteVehicle(UUID uuid) {
+        vehicleRepository.deleteById(uuid);
+    }
 }

@@ -31,4 +31,14 @@ public class VehicleController {
     public Vehicle getVehicle(@PathVariable String id) {
         return vehicleService.getVehicle(UUID.fromString(id));
     }
+
+    @PutMapping("/update-vehicle")
+    public Vehicle updateVehicle(@RequestBody Vehicle vehicle) {
+        return vehicleService.updateVehicle(vehicle);
+    }
+
+    @DeleteMapping("/delete-vehicle/{id}")
+    public void deleteVehicle(@PathVariable String id) {
+        vehicleService.deleteVehicle(UUID.fromString(id));
+    }
 }
