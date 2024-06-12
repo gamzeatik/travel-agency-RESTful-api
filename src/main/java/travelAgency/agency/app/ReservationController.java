@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import travelAgency.agency.application.CreateReservationDto;
 import travelAgency.agency.application.ReservationService;
 
+@CrossOrigin(origins = "https://www.comfortabletransfer.com")
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {

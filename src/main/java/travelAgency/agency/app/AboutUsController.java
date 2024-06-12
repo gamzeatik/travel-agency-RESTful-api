@@ -6,6 +6,7 @@ import travelAgency.agency.application.CreateAboutUsDto;
 import travelAgency.agency.application.UpdateAboutUsDto;
 import travelAgency.agency.domain.AboutUs;
 
+@CrossOrigin(origins = "https://www.comfortabletransfer.com")
 @RequestMapping("/about-us")
 @RestController
 public class AboutUsController {

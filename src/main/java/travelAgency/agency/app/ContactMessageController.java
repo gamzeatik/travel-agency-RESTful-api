@@ -7,6 +7,7 @@ import travelAgency.agency.domain.ContactMessage;
 
 import java.util.List;
 
+@CrossOrigin(origins = "https://www.comfortabletransfer.com")
 @RestController
 @RequestMapping("/contact-us")
 public class ContactMessageController {

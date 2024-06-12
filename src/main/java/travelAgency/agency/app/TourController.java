@@ -9,6 +9,7 @@ import travelAgency.agency.domain.Tour;
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin(origins = "https://www.comfortabletransfer.com")
 @RestController
 @RequestMapping("/tours")
 public class TourController {

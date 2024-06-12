@@ -9,6 +9,7 @@ import travelAgency.agency.application.LogoutService;
 import travelAgency.agency.application.UserService;
 import travelAgency.agency.domain.TokenResponse;
 
+@CrossOrigin(origins = "https://www.comfortabletransfer.com")
 @RestController
 @RequestMapping("/user")
 public class UserController {
